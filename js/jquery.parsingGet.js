@@ -1,7 +1,7 @@
 /*
 
  ParsingGet — jQuery plugin
- Version: 0.0.1
+ Version: 0.1
  Author: M.Ulyanov (web.ulyanov@gmail.com)
  Site: http://web-ulyanov.ru
  Source && Doc: https://github.com/M-Ulyanov/ParsingGet
@@ -19,11 +19,23 @@
 		}, options);
 
 		// С какими элементами будем работать
-		var arrInput = ['input[type="text"]', 'input[type="color"]', 'input[type="date"]',
-										'input[type="hidden"]', 'input[type="datetime"]', 'input[type="datetime-local"]',
-										'input[type="email"]', 'input[type="number"]', 'input[type="range"]',
-										'input[type="search"]','input[type="tel"]', 'input[type="time"]',
-										'input[type="url"]', 'input[type="month"]', 'input[type="week"]'];
+		var arrInput = [
+										'input[type="text"]', 
+										'input[type="color"]',
+										'input[type="date"]',
+										'input[type="hidden"]',
+										'input[type="datetime"]',
+										'input[type="datetime-local"]',
+										'input[type="email"]',
+										'input[type="number"]',
+										'input[type="range"]',
+										'input[type="search"]',
+										'input[type="tel"]',
+										'input[type="time"]',
+										'input[type="url"]',
+										'input[type="month"]',
+										'input[type="week"]'
+									];
 
 		// Получение и разбор GET параметров в ассоциативный массив
 		var url = window.location.href;
@@ -46,8 +58,6 @@
       }
 
 		};
-
-		console.log(ObjParams);
 
 		// Основной цикл
 		return this.each(function() {
