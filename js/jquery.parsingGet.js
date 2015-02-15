@@ -16,7 +16,7 @@
 		// Параметры по умолчанию
 		var defaults = $.extend({}, {
 		
-		}, options);
+		}, options); 
 
 		// С какими элементами будем работать
 		var arrInput = [
