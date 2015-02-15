@@ -7,7 +7,7 @@
 <script src="js/jquery.parsingGet.js"></script>
 <script type="text/javascript">
 	$(function(){
-
+			$('.filter_goods').parsingGet();
 	})
 </script>
 </head>
@@ -16,11 +16,11 @@
 		<h1>Демонстрация плагина parsingGet</h1>
 	</header>
 	<div id="wrapper">
-		<form class="filter" action="" method="GET">
+		<form class="filter_goods" action="" method="GET">
 			<div class="wrapper_form_elems">
 				<span>По ключевому слову:</span>
 				<label>
-					<input type="text" name="keyword"> 
+					<input type="text" name="keywords"> 
 				</label>
 			</div>
 			<button type="submit">Фильтровать</button>
