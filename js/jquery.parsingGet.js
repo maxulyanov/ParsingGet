@@ -1,7 +1,7 @@
 /*
 
  ParsingGet — jQuery plugin
- Version: 0.1.3
+ Version: 0.1.4
  Author: M.Ulyanov (web.ulyanov@gmail.com)
  Site: http://web-ulyanov.ru
  Source && Doc: https://github.com/M-Ulyanov/ParsingGet
@@ -15,9 +15,8 @@
 
 		// Параметры по умолчанию
 		var defaults = $.extend({}, {
-		
+			ignore: 'no_parsing_get'
 		}, options); 
-
 		// С какими элементами будем работать
 		var arrInput = [
 			'input[type="text"]', 
@@ -44,7 +43,13 @@
 		// Получение и разбор GET параметров в ассоциативный массив
 		var url = window.location.href;
 		var hash = url.slice(url.indexOf('?') + 1).split('&');
-		var ObjParams = {};
+		var objParams = {};
+		var objProperty = {
+     	ignore: function(self) {
+     		if($(self).hasClass(defaults.ignore))
+     			return false;
+     	}
+    };
 
 		if(hash.length <= 1)
 			return;
@@ -54,26 +59,28 @@
 			var key = decodeURIComponent(iHash[0]);
 			var value = decodeURIComponent(iHash[1].replace(/\+/g, ' '));
 
-			if(key in ObjParams) { 
-        if(typeof ObjParams[key] == 'string') {
-        	ObjParams[key] = [ObjParams[key]];
+			if(key in objParams) { 
+        if(typeof objParams[key] == 'string') {
+        	objParams[key] = [objParams[key]];
         }
-      	ObjParams[key].push(value);
+      	objParams[key].push(value);
       } 
       else {
-        ObjParams[key] = value;
+        objParams[key] = value;
       }
 
 		};
 
 		// Основной цикл
 		return this.each(function() {
-			
 			// Input
 			for(var i = 0; i < arrInput.length; i++) {
 				$(this).find(arrInput[i]).each( function() {
+						if(objProperty.ignore(this) == false)
+							return;
+
 	          var name = $(this).attr('name');
-	          var value = ObjParams[name];
+	          var value = objParams[name];
 	          if(!!value) {
 	            $(this).val(value);
 	          }
@@ -82,8 +89,11 @@
 
 			// Textarea
 			$(textarea).each(function() {
+				if(objProperty.ignore(this) == false)
+					return;
+
 				var name = $(this).attr('name');
-        var value  = ObjParams[name];
+        var value  = objParams[name];
         if(!!value) {
           $(this).text(value);
 	      }
@@ -91,8 +101,11 @@
 
 			// Radio, Checkbox
 			$(checkbox, radio).each(function() {
+				if(objProperty.ignore(this) == false)
+					return;
+
 				var name = $(this).attr('name');
-        var value  = ObjParams[name];
+        var value  = objParams[name];
         var thisval = $(this).val();
         if(value == thisval || $.inArray(thisval, value) != -1) {
         		$(this).attr('checked', 'checked');
@@ -101,9 +114,12 @@
 
 			// Select
 			$(select).each(function() {
+				if(objProperty.ignore(this) == false)
+					return;
+
 				var name = $(this).attr('name');
 				$(this).find('option').each(function() {
-					var value  = ObjParams[name];
+					var value  = objParams[name];
         	var thisval = $(this).val();
 	        if(value == thisval || $.inArray(thisval, value) != -1) {
 	        		$(this).attr('selected', 'selected');
