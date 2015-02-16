@@ -36,6 +36,7 @@
 			'input[type="month"]',
 			'input[type="week"]'
 		];
+		var textarea = $('textarea');
 
 		// Получение и разбор GET параметров в ассоциативный массив
 		var url = window.location.href;
@@ -71,7 +72,16 @@
 	            $(this).val(val);
 	          }
 	      });
-			}
+			};
+
+			// Textarea
+			$(textarea).each(function() {
+				var name = $(this).attr('name');
+        var val  = ObjParams[name];
+        if(!!val) {
+          $(this).text(val);
+	      }
+			});
 
 		});
 	}
