@@ -22,7 +22,26 @@
 				<label>
 					<input type="text" name="keywords"> 
 				</label>
+				<div>
+					<span>Город:	</span>
+					<label>Barselona <input type="checkbox" name="city[]" value="1"></label>
+					<label>San Pol <input type="checkbox" name="city[]" value="2"></label>
+					<label>Bar Bro <input type="checkbox" name="city[]" value="3"></label>
+					<label>M Str <input type="checkbox" name="city[]" value="4"></label>
+				</div>
 			</div>
+			<label> 
+		<select name="razdel">
+			<option value="">Все</option>
+			<option value="1">Квартира</option>
+			<option value="2">Вилла</option>
+		 </select>
+		 <select name="razdel2" size="3" multiple>
+			<option value="">Все</option>
+			<option value="1">Квартира</option>
+			<option value="2">Вилла</option>
+		 </select>
+		</label>
 			<button type="submit">Фильтровать</button>
 		</form>
 	</div>

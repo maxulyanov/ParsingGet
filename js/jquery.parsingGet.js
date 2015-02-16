@@ -1,7 +1,7 @@
 /*
 
  ParsingGet — jQuery plugin
- Version: 0.1
+ Version: 0.1.3
  Author: M.Ulyanov (web.ulyanov@gmail.com)
  Site: http://web-ulyanov.ru
  Source && Doc: https://github.com/M-Ulyanov/ParsingGet
@@ -37,11 +37,17 @@
 			'input[type="week"]'
 		];
 		var textarea = $('textarea');
+		var radio = $('input[type="radio"]');
+		var checkbox = $('input[type="checkbox"]');
+		var select = $('select');
 
 		// Получение и разбор GET параметров в ассоциативный массив
 		var url = window.location.href;
 		var hash = url.slice(url.indexOf('?') + 1).split('&');
 		var ObjParams = {};
+
+		if(hash.length <= 1)
+			return;
 
 		for(var i = 0; i < hash.length; i++) {
 			var iHash = hash[i].split('=');
@@ -67,9 +73,9 @@
 			for(var i = 0; i < arrInput.length; i++) {
 				$(this).find(arrInput[i]).each( function() {
 	          var name = $(this).attr('name');
-	          var val  = ObjParams[name];
-	          if(!!val) {
-	            $(this).val(val);
+	          var value = ObjParams[name];
+	          if(!!value) {
+	            $(this).val(value);
 	          }
 	      });
 			};
@@ -77,10 +83,32 @@
 			// Textarea
 			$(textarea).each(function() {
 				var name = $(this).attr('name');
-        var val  = ObjParams[name];
-        if(!!val) {
-          $(this).text(val);
+        var value  = ObjParams[name];
+        if(!!value) {
+          $(this).text(value);
 	      }
+			});
+
+			// Radio, Checkbox
+			$(checkbox, radio).each(function() {
+				var name = $(this).attr('name');
+        var value  = ObjParams[name];
+        var thisval = $(this).val();
+        if(value == thisval || $.inArray(thisval, value) != -1) {
+        		$(this).attr('checked', 'checked');
+        }
+			});
+
+			// Select
+			$(select).each(function() {
+				var name = $(this).attr('name');
+				$(this).find('option').each(function() {
+					var value  = ObjParams[name];
+        	var thisval = $(this).val();
+	        if(value == thisval || $.inArray(thisval, value) != -1) {
+	        		$(this).attr('selected', 'selected');
+	        }
+				});
 			});
 
 		});
