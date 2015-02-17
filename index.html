@@ -7,49 +7,84 @@
 <script src="js/jquery.parsingGet.js"></script>
 <script type="text/javascript">
 	$(function(){
-			$('.filter_goods').parsingGet({
+			$('.filter_goods, .form_ignore').parsingGet({
 				ignore: 'my_no_parse'
 			});
 	})
 </script>
 </head>
 <body>
-	<header>
-		<h1>Демонстрация плагина parsingGet</h1>
-	</header>
 	<div id="wrapper">
+		<header>
+			<h2>Удобно использовать для фильтрации товаров и услуг, форм обратной связи, поиска...</h2>
+			<span>Не нужно каждый раз запоминать и обрабатывать данные на сервере!</span>
+		</header>
 		<form class="filter_goods" action="" method="GET">
 			<div class="wrapper_form_elems">
-				<span>По ключевому слову:</span>
+				<span>По типу: </span>
+				<label>Снять<input type="radio" name="type" value="1"></label>
+				<label>Купить<input type="radio" name="type" value="2"></label>
+			</div>
+			<div class="wrapper_form_elems">
+				<span>Ключевые слова:</span>
 				<label>
 					<input type="text" name="keywords"> 
 				</label>
-				<label>
-					<input type="text" name="keywords2" class="my_no_parse"> 
-				</label>
-				<div>
-					<span>Город:	</span>
-					<label>Barselona <input type="checkbox" name="city[]" value="1"></label>
-					<label>San Pol <input type="checkbox" name="city[]" value="2"></label>
-					<label>Bar Bro <input type="checkbox" name="city[]" value="3"></label>
-					<label>M Str <input type="checkbox" name="city[]" value="4"></label>
-				</div>
 			</div>
-			<label> 
-		<select name="razdel">
-			<option value="">Все</option>
-			<option value="1">Квартира</option>
-			<option value="2">Вилла</option>
-		 </select>
-		 <select name="razdel2" size="3" multiple class="no_parsing_get">
-			<option value="">Все</option>
-			<option value="1">Квартира</option>
-			<option value="2">Вилла</option>
-		 </select>
-		</label>
-			<button type="submit">Фильтровать</button>
+			<div class="wrapper_form_elems">
+				<span>Вид:	</span>
+				<label>Квартира <input type="checkbox" name="cat[]" value="1"></label>
+				<label>Комната <input type="checkbox" name="cat[]" value="2"></label>
+				<label>Дом <input type="checkbox" name="cat[]" value="3"></label>
+				<label>Участок <input type="checkbox" name="cat[]" value="4"></label>
+			</div>
+			<div class="wrapper_form_elems">
+				<span>Этаж:	</span>
+				<label>1-5<input type="checkbox" name="floor[]" value="1"></label>
+				<label>6-10<input type="checkbox" name="floor[]" value="2"></label>
+				<label>10-15<input type="checkbox" name="floor[]" value="3"></label>
+				<label>16+<input type="checkbox" name="floor[]" value="4"></label>
+			</div>
+			<div class="wrapper_form_elems">
+				<span>По типу:</span>
+				<label> 
+					<select name="currency">
+						<option value="rub">руб</option>
+						<option value="dollar">$</option>
+						<option value="euro">€</option>
+					</select>
+				</label>
+			</div>
+			<div class="wrapper_form_elems">
+				<span>Цена </span>
+				<label>
+					от:
+					<input type="number" name="price_min">
+					до: 
+					<input type="number" name="price_max">
+				</label>
+			</div>
+			<button type="submit">Подобрать варианты</button>
 		</form>
-	</div>
+		<header>
+			<h2>Добавить в исключения</h2>
+			<span>Плагин может не запоминать значения одного или нескольких элементов!</span>
+		</header>
+		<form class="form_ignore" action="" method="GET">
+			<div class="wrapper_form_elems">
+				<span>Сохранится после перезагрузки страницы:</span>
+				<label>
+					<input type="text" name="save_input"> 
+				</label>
+				<span>Никогда не будет считываться из URL:</span>
+				<label>
+					<input type="text" name="ignore_input" class="my_no_parse"> 
+				</label>
+			</div>
+			<button type="submit">Проверить значения</button>
+		</form>
+		<a class="url_github" target="_blank" href="https://github.com/M-Ulyanov/ParsingGet">Github</a>
+	</div>	
 </body>
 </html>
 
