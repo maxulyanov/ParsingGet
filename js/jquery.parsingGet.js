@@ -69,7 +69,9 @@
 			for(var i = 0; i < hash.length; i++) {
 				var iHash = hash[i].split('=');
 				var key = decodeURIComponent(iHash[0]);
-				var value = decodeURIComponent(iHash[1].replace(/\+/g, ' '));
+				var value = iHash[1];
+				if(value)
+					value = decodeURIComponent(iHash[1].replace(/\+/g, ' '));
 
 				if(key in objParams) { 
 	        if(typeof objParams[key] == 'string') {
@@ -108,7 +110,6 @@
 
 		          var name = $(this).attr('name');
 		          var value = obj[name];
-		          console.log(obj)
 		          if(!!value) {
 		            $(this).val(value);
 		          }
