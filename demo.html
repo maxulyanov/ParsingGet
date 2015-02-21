@@ -7,9 +7,13 @@
 <script src="js/jquery.parsingGet.js"></script>
 <script type="text/javascript">
 	$(function(){
-			$('.filter_goods, .form_ignore').parsingGet({
-				ignore: 'my_no_parse'
+			$('.filter_goods, .form_ignore, .start_parse_f').parsingGet({
+				ignoreClass: 'my_no_show',
 			});
+
+			$('.start_parse').on('click', function() {
+				$('.start_parse_f').parsingGet('show');
+			});	
 	})
 </script>
 </head>
@@ -78,11 +82,26 @@
 				</label>
 				<span>Никогда не будет считываться из URL:</span>
 				<label>
-					<input type="text" name="ignore_input" class="my_no_parse"> 
+					<input type="text" name="ignore_input" class="my_no_show"> 
 				</label>
 			</div>
 			<button type="submit">Проверить значения</button>
 		</form>
+		<header>
+			<h2>Отложенный старт</h2>
+			<span>Плагин загрузит значения тогда, когда вам это нужно!</span>
+		</header>
+		<form class="start_parse_f my_no_show" action="" method="GET">
+			<div class="wrapper_form_elems">
+				<span>Появится после нажатия на кнопку:</span>
+				<label>
+					<input type="text" name="start_input"> 
+				</label>
+			</div>
+			<button type="submit">Запиcать в GET</button>
+		</form>
+		<a class="start_parse" href="javascript:void(0)">Показать переданные данные</a>
+
 		<a class="url_github" target="_blank" href="https://github.com/M-Ulyanov/ParsingGet">Github</a>
 	</div>	
 </body>
