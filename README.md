@@ -28,7 +28,7 @@
     <tr>
       <th>Имя</th>
       <th>Значение по умолчанию</th>
-	  <th>Описание/th>
+	  <th>Описание</th>
     </tr>
     <tr>
       <td>ignoreClass</td>
